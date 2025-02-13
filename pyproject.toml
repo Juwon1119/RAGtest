@@ -6,7 +6,11 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "polars",
-    "lancedb"
+    "pandas",
+    "lancedb",
+    "pydantic-settings",
+    "orjson>=3.10.15",
+    "openai>=1.62.0",
 ]
 
 [dependency-groups]
@@ -71,13 +75,5 @@ ignore = [
 ]
 unfixable = ["F401"] # 사용하지 않은 import 항목 자동 수정 방지
 
-[tool.ruff.lint.per-file-ignores]
-"**/tests/*.py" = ["S101"]
-"**/integration_tests/*.py" = ["S101"]
-
 [tool.ruff.lint.flake8-bugbear]
 extend-immutable-calls = ["pydantic.Field", "fast_depends.Depends"]
-
-[tool.pytest.ini_options]
-asyncio_default_fixture_loop_scope = "session"
-asyncio_mode = "auto"
