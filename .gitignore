@@ -176,3 +176,6 @@ pyrightconfig.json
 
 # End of https://www.toptal.com/developers/gitignore/api/python
 requirements.txt
+
+# RAG DATA: repo에는 가능한 데이터를 넣지 않기
+data/
