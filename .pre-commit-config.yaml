@@ -1,0 +1,55 @@
+repos:
+  - repo: http://192.168.10.3:7990/scm/~hdw0731/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: check-ast
+      - id: check-builtin-literals
+      - id: check-merge-conflict
+      - id: check-shebang-scripts-are-executable
+      - id: check-json
+      - id: check-toml
+      - id: check-yaml
+      - id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+
+  - repo: http://192.168.10.3:7990/scm/~hdw0731/mirrors-prettier
+    rev: v3.4.2
+    hooks:
+      - id: prettier
+
+  - repo: http://192.168.10.3:7990/scm/~hdw0731/ruff-pre-commit
+    rev: v0.9.1
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
+
+  - repo: http://192.168.10.3:7990/scm/~hdw0731/pyright-python
+    rev: v1.1.391
+    hooks:
+      - id: pyright
+        additional_dependencies:
+          - pyright[nodejs]
+          - taskiq-faststream
+          - taskiq-redis
+          - pydantic-settings
+          - polyfactory
+          - river
+          - jrcf
+          - polars
+          - httpx
+          - diskcache
+          - langgraph
+          - pytest
+          - hypothesis
+          - freezegun
+          - redis[hiredis]
+          - beanie
+          - expression
+          - orjson
+          - fsspec
+          - structlog
+          - rich
+          - zstandard

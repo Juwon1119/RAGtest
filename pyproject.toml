@@ -1,0 +1,83 @@
+[project]
+name = "ragtest"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "polars",
+    "lancedb"
+]
+
+[dependency-groups]
+dev = [
+    "ruff",
+    "pre-commit-uv",
+    "pyright[nodejs]",
+]
+test = [
+    "pytest",
+    "pytest-cov",
+    "pytest-sugar",
+    "pytest-asyncio",
+]
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+[tool.ruff]
+target-version = "py312"
+
+[tool.ruff.lint]
+# https://docs.astral.sh/ruff/rules/
+select = [
+    "A",      # flake8-builtins: python builtin 함수와 같은 이름 사용 금지
+    "ANN001", # flake8-annotaion 타입 힌트
+    "ARG",    # flake8-unused-arguments: 사용하지 않은 인자 방지
+    "B",      # flake8-bugbear: 잠재적 버그 예방
+    "C4",     # flake8-comprehensions: 파이썬 comprehension 문법 사용 권장
+    "C90",    # mccabe: 함수 복잡도가 일정 이상인 함수 작성 금지
+    "E",      # pycodestyle error: 공백, 콤마, 탭 문자 등에 대한 에러 방지
+    "EM",     # flake8-errmsg: raise문의 에러 메세지 관련
+    "F",      # Pyflakes: 전반적인 파이썬 문법
+    "FA",     # flake8-future-annotations: from __future__ import annotaitions 관련
+    "FURB",   # refurb
+    "I001",   # isort: import 구문 정리
+    "ISC",    # flake8-implicit-str-concat: 문자열 합치기와 관련된 에러 방지
+    "N",      # pep8-naming: pep8에 제시된 파이썬 변수명 사용 권장
+    "NPY",    # numpy-specific rules
+    "PD",     # pandas-vet: pandas 대상 룰
+    "PERF",   # Perflint: 성능 저하에 영향이 있는 문법 방지
+    "PGH",    # pygrep-hooks
+    "PIE",    # flake8-pie
+    "PL",     # pylint rule
+    "PT",     # flake8-pytest-style: pytest 관련
+    "RET",    # flake8-return: 함수의 return 관련
+    "RUF",    # Ruff-specific rules
+    "S",      # flake8-bandit: 보안 관련
+    "SLF",    # flake8-self: 클래스의 비공개 멤버 호출 금지
+    "SIM",    # flake8-simplify: 가능한 단순하게
+    "T20",    # flake8-print: print와 pprint 사용 금지
+    "TD",     # flake8-todos: TODO와 관련된 규칙
+    "TRY",    # tryceratops: 에러 일으키기와 관련된 룰
+    "UP",     # pyupgrade: 최신버전의 파이썬 문법으로 전환
+    "W",      # pycodestyle warning: 공백, 콤마, 탭 문자 등에 대한 에러 방지
+]
+ignore = [
+    "E501",    # line-too-long
+    "PD901",   # pandas-df-variable-name
+    "PLR2004", # magic-value-comparison
+]
+unfixable = ["F401"] # 사용하지 않은 import 항목 자동 수정 방지
+
+[tool.ruff.lint.per-file-ignores]
+"**/tests/*.py" = ["S101"]
+"**/integration_tests/*.py" = ["S101"]
+
+[tool.ruff.lint.flake8-bugbear]
+extend-immutable-calls = ["pydantic.Field", "fast_depends.Depends"]
+
+[tool.pytest.ini_options]
+asyncio_default_fixture_loop_scope = "session"
+asyncio_mode = "auto"
